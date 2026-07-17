@@ -1,0 +1,17 @@
+node_modules/
+dist/
+
+# Chrome-generated theme cache
+theme/Cached Theme.pak
+**/Cached Theme.pak
+
+# Local Chrome packages and signing keys
+*.crx
+*.pem
+
+# Editor and operating-system files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

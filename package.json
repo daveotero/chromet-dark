@@ -1,0 +1,21 @@
+{
+  "name": "chromet-dark",
+  "version": "1.3.0",
+  "private": true,
+  "description": "Build and validation tooling for the Chromet Dark Google Chrome theme.",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-assets.mjs",
+    "validate": "node scripts/validate-theme.mjs",
+    "test": "npm run validate",
+    "package": "node scripts/package-theme.mjs",
+    "release:check": "npm run build && npm run validate && npm run package"
+  },
+  "devDependencies": {
+    "archiver": "7.0.1",
+    "sharp": "0.34.5"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

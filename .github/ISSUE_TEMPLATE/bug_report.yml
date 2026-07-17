@@ -1,0 +1,73 @@
+name: Rendering issue
+description: Report a visual problem in Chrome.
+title: "[Rendering]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for helping make Chromet Dark more consistent. Remove private information from screenshots before attaching them.
+  - type: input
+    id: chrome-version
+    attributes:
+      label: Chrome version
+      description: Copy the version from chrome://version.
+      placeholder: 138.0.0.0
+    validations:
+      required: true
+  - type: input
+    id: operating-system
+    attributes:
+      label: Operating system
+      placeholder: Windows 11 24H2
+    validations:
+      required: true
+  - type: input
+    id: display-scale
+    attributes:
+      label: Display scaling
+      placeholder: 100%, 125%, or 150%
+    validations:
+      required: true
+  - type: dropdown
+    id: window-state
+    attributes:
+      label: Window state
+      options:
+        - Maximized
+        - Restored
+        - Snapped
+        - Full screen
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What looks wrong?
+      description: Explain where the issue appears and what you expected.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Load Chromet Dark
+        2. Open two tabs
+        3. Maximize Chrome
+        4. Observe the active tab seam
+    validations:
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: Attach a full-window screenshot and a close crop if possible.
+  - type: checkboxes
+    id: restart
+    attributes:
+      label: Basic checks
+      options:
+        - label: I restarted Chrome and the issue still appears.
+          required: true
+        - label: I removed personal information from screenshots.
+          required: true

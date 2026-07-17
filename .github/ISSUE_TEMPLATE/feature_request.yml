@@ -1,0 +1,29 @@
+name: Theme suggestion
+description: Suggest a careful visual refinement.
+title: "[Suggestion]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: What would you change?
+      description: Identify the Chrome surface, state, and proposed visual change.
+    validations:
+      required: true
+  - type: textarea
+    id: reason
+    attributes:
+      label: Why would it improve the theme?
+      description: Explain the usability or consistency problem it solves.
+    validations:
+      required: true
+  - type: input
+    id: color
+    attributes:
+      label: Proposed color, if applicable
+      placeholder: "#323436"
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Screenshots or mockups are useful. Remove private information first.
