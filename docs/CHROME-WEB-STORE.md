@@ -70,7 +70,7 @@ npm ci
 npm run release:check
 ```
 
-Upload `dist/chromet-dark-1.3.0.zip`. Its `manifest.json` is at the archive root.
+Upload `dist/chromet-dark-1.4.0.zip`. Its `manifest.json` is at the archive root.
 
 ## Pre-submission checklist
 
@@ -90,7 +90,7 @@ Upload `dist/chromet-dark-1.3.0.zip`. Its `manifest.json` is at the archive root
 ## Publication sequence
 
 1. Merge the final tested version to `main`.
-2. Create and push a matching tag, such as `v1.3.0`.
+2. Create and push a matching tag, such as `v1.4.0`.
 3. Let the GitHub release workflow attach the generated ZIP.
 4. Upload the same ZIP in the Chrome Web Store developer dashboard.
 5. Complete the listing, privacy, distribution, and test-instruction sections.

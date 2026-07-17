@@ -16,13 +16,35 @@ await Promise.all([
   fs.mkdir(storeDir, { recursive: true })
 ]);
 
-const toolbar = Buffer.from(`
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="200" viewBox="0 0 512 200">
-  <rect width="512" height="200" fill="#1F2121"/>
-  <rect width="512" height="56" fill="#323436"/>
-</svg>`);
+const toolbarWidth = 512;
+const toolbarHeight = 200;
+const gradientStartRow = 48;
+const gradientEndRow = 63;
+const activeSurface = [50, 52, 54];
+const toolbarSurface = [31, 33, 33];
+const toolbar = Buffer.alloc(toolbarWidth * toolbarHeight * 4);
 
-await sharp(toolbar)
+for (let y = 0; y < toolbarHeight; y++) {
+  const blend = y < gradientStartRow
+    ? 0
+    : y > gradientEndRow
+      ? 1
+      : (y - gradientStartRow) / (gradientEndRow - gradientStartRow);
+  const color = activeSurface.map((channel, index) =>
+    Math.round(channel + (toolbarSurface[index] - channel) * blend));
+
+  for (let x = 0; x < toolbarWidth; x++) {
+    const offset = (y * toolbarWidth + x) * 4;
+    toolbar[offset] = color[0];
+    toolbar[offset + 1] = color[1];
+    toolbar[offset + 2] = color[2];
+    toolbar[offset + 3] = 255;
+  }
+}
+
+await sharp(toolbar, {
+  raw: { width: toolbarWidth, height: toolbarHeight, channels: 4 }
+})
   .png({ compressionLevel: 9, palette: true })
   .toFile(path.join(imageDir, "toolbar.png"));
 

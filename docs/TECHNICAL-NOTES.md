@@ -4,14 +4,41 @@
 
 Chrome does not expose a simple, reliable active-tab background color that behaves independently from the toolbar in every current desktop layout. When `theme_toolbar` is present, Chrome paints both the active tab and the toolbar from that image, but it samples the image at different vertical offsets.
 
-Chromet Dark uses that behavior intentionally. [`../theme/images/toolbar.png`](../theme/images/toolbar.png) is a 512 by 200 PNG with two solid bands:
+Chromet Dark uses that behavior intentionally. [`../theme/images/toolbar.png`](../theme/images/toolbar.png) is a 512 by 200 PNG with two solid regions joined by a short vertical blend:
 
-- Rows 0 through 55 are `#323436`.
-- Rows 56 through 199 are `#1F2121`.
+- Rows 0 through 47 are `#323436`.
+- Rows 48 through 63 blend linearly from `#323436` to `#1F2121`.
+- Rows 64 through 199 are `#1F2121`.
 
-Chrome offsets the active-tab sample by 16 source pixels. As a result, the source transition at row 56 appears at the visible seam between the active tab and toolbar. An earlier transition made the lower half of the selected tab inherit the toolbar color, which looked like a misaligned overlay. Version 1.3.0 moved the transition to the correct row.
+Chrome samples that image differently for the active tab and toolbar. Version 1.3.0 used a hard transition at row 56, which fixed an earlier misaligned lower-tab overlay but left a narrow, visually abrupt handoff. Version 1.4.0 replaces that edge with the 16-pixel blend. At the center of the transition, row 56 is `#282A2B`, midway between the two primary surfaces.
 
-The validation script checks pixels at rows 0, 55, 56, and 199. This prevents an asset optimization, editor export, or later palette change from silently reintroducing the seam.
+The validation script computes the expected color for every transition row and checks the left, center, and right sides of the image. This prevents an asset optimization, editor export, or later palette change from silently changing the blend or reintroducing the hard seam.
+
+## Why the blend also appears in the toolbar
+
+Chrome has no active-tab-only image or overlay slot. `theme_toolbar` is the active-tab fill and the toolbar artwork, so the same transition rows are reused in both places. Moving the blend fully into the active tab also moves it farther into the toolbar.
+
+Other theme image fields do not solve this:
+
+- `theme_tab_background` affects inactive tabs.
+- `theme_frame_overlay` is fixed to the window frame and cannot follow the selected tab.
+- Theme colors and tints change paint values but not the active-tab geometry or layer structure.
+
+The 16-pixel blend is deliberately short. It softens the connected-tab handoff without making gradient treatment a general part of the interface.
+
+## The divider below the bookmarks bar
+
+Chrome owns the physical thickness of the line between the toolbar or bookmarks bar and page content. [`COLOR_TOOLBAR_CONTENT_AREA_SEPARATOR` is explicitly not overwritable by a user theme](https://chromium.googlesource.com/chromium/src/+/refs/heads/main/chrome/browser/themes/theme_properties.h), so Chromet Dark cannot make that geometry thinner.
+
+[Chrome derives the separator color](https://chromium.googlesource.com/chromium/src/+/8ee1cda058f1700bfa3b75a616acdcee21707d87/chrome/browser/themes/theme_helper.cc) by blending `toolbar_button_icon` into `toolbar` at an alpha of `0x3A`. Earlier Chromet Dark builds declared `toolbar` as `#434646` even though the opaque toolbar artwork settled at `#1F2121`. With the icon color at `#8C8D8C`, that mismatch produced an approximately `#545656` divider, which was much brighter than the visible bookmarks surface.
+
+Version 1.4.0 aligns the declared toolbar fallback with the rendered lower surface:
+
+- `toolbar`: `#1F2121`
+- `toolbar_button_icon`: `#8C8D8C`
+- Expected derived separator: `#383A39`
+
+The divider retains Chrome's fixed layout thickness. At the scale captured during development it is one physical pixel. Its lower contrast makes it read as a finer, quieter boundary while leaving the toolbar icons unchanged.
 
 ## Why not use a tab background image
 

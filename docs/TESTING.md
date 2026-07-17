@@ -27,8 +27,9 @@ Chrome theme rendering can change with browser updates, operating-system chrome,
 
 Acceptance criteria:
 
-- The full active tab reads as one `#323436` surface.
-- No horizontal split or darker overlay appears in the lower part of the active tab.
+- The upper active tab reads as `#323436` and transitions gently near the toolbar handoff.
+- No abrupt horizontal split or hard dark stripe appears in the lower part of the active tab.
+- The 16-pixel transition is smooth, subtle, and free of visible banding.
 - Inactive tabs remain visibly darker than the active tab.
 - Active and inactive labels remain readable.
 - The tab-to-toolbar seam is clean at the tested scale.
@@ -50,6 +51,9 @@ Acceptance criteria:
 
 - Toolbar icons are distinct without looking bright white.
 - The active tab and address bar feel related but do not merge into one shape.
+- The reused transition does not make the toolbar look broadly gradient-heavy.
+- The divider below the bookmarks bar is visible but does not pull attention away from the page.
+- Toolbar icons retain their existing brightness and clarity.
 - Text remains readable in menus and bubbles controlled by the theme.
 
 ## Page-adjacent surfaces

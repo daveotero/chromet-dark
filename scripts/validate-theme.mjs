@@ -8,6 +8,7 @@ const root = path.resolve(here, "..");
 const themeRoot = path.join(root, "theme");
 const manifest = JSON.parse(await fs.readFile(path.join(themeRoot, "manifest.json"), "utf8"));
 const packageJson = JSON.parse(await fs.readFile(path.join(root, "package.json"), "utf8"));
+const colorsOnlyManifest = JSON.parse(await fs.readFile(path.join(root, "variants", "colors-only", "manifest.json"), "utf8"));
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -16,6 +17,7 @@ function assert(condition, message) {
 assert(manifest.manifest_version === 3, "manifest_version must be 3");
 assert(manifest.name === "Chromet Dark", "Unexpected theme name");
 assert(manifest.version === packageJson.version, "Theme and package versions must match");
+assert(colorsOnlyManifest.version === packageJson.version, "Colors-only variant and package versions must match");
 assert(!("permissions" in manifest), "Themes must not request permissions");
 assert(!("host_permissions" in manifest), "Themes must not request host permissions");
 
@@ -32,6 +34,16 @@ for (const [key, value] of Object.entries(manifest.theme.colors)) {
   assert(Array.isArray(value) && (value.length === 3 || value.length === 4), `${key} must be an RGB or RGBA array`);
   assert(value.every((channel) => Number.isInteger(channel) && channel >= 0 && channel <= 255), `${key} contains an invalid color channel`);
 }
+
+const toolbarColor = manifest.theme.colors.toolbar;
+const toolbarIconColor = manifest.theme.colors.toolbar_button_icon;
+assert(JSON.stringify(toolbarColor) === JSON.stringify([31, 33, 33]), "toolbar must match the solid lower toolbar image region");
+assert(JSON.stringify(toolbarIconColor) === JSON.stringify([140, 141, 140]), "Unexpected toolbar icon color");
+
+const separatorAlpha = 0x3A;
+const derivedContentDivider = toolbarIconColor.map((channel, index) =>
+  Math.round((separatorAlpha * channel + (255 - separatorAlpha) * toolbarColor[index]) / 255));
+assert(JSON.stringify(derivedContentDivider) === JSON.stringify([56, 58, 57]), "Unexpected derived toolbar content divider color");
 
 const references = [
   ...Object.values(manifest.icons ?? {}),
@@ -70,11 +82,21 @@ function pixel(x, y) {
   return [...toolbarPixels.subarray(start, start + 4)];
 }
 
-for (const row of [0, 55]) {
-  assert(JSON.stringify(pixel(0, row)) === JSON.stringify([50, 52, 54, 255]), `Toolbar active-tab band is wrong at row ${row}`);
+function expectedToolbarPixel(row) {
+  const active = [50, 52, 54];
+  const toolbar = [31, 33, 33];
+  const blend = row < 48 ? 0 : row > 63 ? 1 : (row - 48) / 15;
+  return [
+    ...active.map((channel, index) => Math.round(channel + (toolbar[index] - channel) * blend)),
+    255
+  ];
 }
-for (const row of [56, 199]) {
-  assert(JSON.stringify(pixel(0, row)) === JSON.stringify([31, 33, 33, 255]), `Toolbar band is wrong at row ${row}`);
+
+for (let row = 0; row < toolbarInfo.height; row++) {
+  const expected = JSON.stringify(expectedToolbarPixel(row));
+  for (const column of [0, Math.floor(toolbarInfo.width / 2), toolbarInfo.width - 1]) {
+    assert(JSON.stringify(pixel(column, row)) === expected, `Toolbar transition is wrong at column ${column}, row ${row}`);
+  }
 }
 
 const expectedAssets = new Map([
@@ -89,4 +111,4 @@ for (const [relativeFile, [width, height]] of expectedAssets) {
   assert(metadata.width === width && metadata.height === height, `${relativeFile} has the wrong dimensions`);
 }
 
-console.log(`Validated Chromet Dark ${manifest.version}: manifest, package contents, icons, toolbar bands, and listing artwork are correct.`);
+console.log(`Validated Chromet Dark ${manifest.version}: manifest, package contents, icons, toolbar gradient, and listing artwork are correct.`);

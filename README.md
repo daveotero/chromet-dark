@@ -11,6 +11,7 @@ A quiet graphite and cyan theme built around contrast, restraint, and getting Ch
 - Near-black window frame and inactive tabs
 - A clearly lifted active tab that matches the address bar
 - Dark toolbar and bookmarks surfaces
+- A quieter content divider beneath the bookmarks bar
 - Warm off-white text and muted gray controls
 - A single cyan accent
 - Dark New Tab page colors
@@ -42,6 +43,7 @@ Chrome permits one active theme at a time. To remove Chromet Dark, open `chrome:
 | Active tab and address bar | `#323436` | 50, 52, 54 |
 | Toolbar and bookmarks | `#1F2121` | 31, 33, 33 |
 | Fine borders and separators | `#3D3F40` | 61, 63, 64 |
+| Derived content divider | `#383A39` | 56, 58, 57 |
 | Primary text | `#D6D5D4` | 214, 213, 212 |
 | Toolbar icons | `#8C8D8C` | 140, 141, 140 |
 | Cyan accent | `#1FB8CD` | 31, 184, 205 |
@@ -53,13 +55,14 @@ The full field map and the reasoning behind the derived colors are documented in
 
 Chrome themes are Manifest V3 packages. The complete installable package lives in [`theme/`](theme) and contains only a manifest and PNG assets.
 
-The unusual part is [`theme/images/toolbar.png`](theme/images/toolbar.png). Chrome uses the same toolbar image for the active tab and the toolbar, but samples it with different vertical offsets. A flat image would make both surfaces the same color. Chromet Dark uses two carefully aligned bands instead:
+The unusual part is [`theme/images/toolbar.png`](theme/images/toolbar.png). Chrome uses the same toolbar image for the active tab and the toolbar, but samples it with different vertical offsets. A flat image would make both surfaces the same color, while a hard split creates an abrupt seam. Chromet Dark uses a short, carefully aligned transition instead:
 
-- Image rows 0 through 55 are `#323436` for the active tab.
-- Image rows 56 through 199 are `#1F2121` for the toolbar and bookmarks area.
-- Chrome's 16-pixel active-tab offset moves that source transition to the visible tab and toolbar seam.
+- Image rows 0 through 47 are solid `#323436`.
+- Image rows 48 through 63 blend from `#323436` to `#1F2121`.
+- Image rows 64 through 199 are solid `#1F2121`.
+- Chrome's vertical sampling places that blend around the visible active-tab and toolbar handoff.
 
-This keeps the active tab readable without turning the whole toolbar gray. More detail is available in [`docs/TECHNICAL-NOTES.md`](docs/TECHNICAL-NOTES.md).
+Chrome does not provide an active-tab-only overlay, so part of the transition is also reused inside the toolbar. The short blend is an intentional compromise: it keeps the active tab readable, softens the native connected-tab shape, and avoids turning the whole toolbar gray. More detail is available in [`docs/TECHNICAL-NOTES.md`](docs/TECHNICAL-NOTES.md).
 
 ## Repository layout
 
@@ -105,7 +108,7 @@ npm run build
 This regenerates:
 
 - Theme icons at 16, 32, 48, and 128 pixels
-- The two-band toolbar image
+- The aligned toolbar-transition image
 - The repository preview
 - The 1280 by 800 store screenshot
 - The 440 by 280 small promotional tile
@@ -158,7 +161,7 @@ The complete checklist is in [`docs/TESTING.md`](docs/TESTING.md).
 The manifest and `package.json` versions should always match. Update [`CHANGELOG.md`](CHANGELOG.md), commit the change, and tag it:
 
 ```bash
-git tag v1.3.0
+git tag v1.4.0
 git push origin main --tags
 ```
 
