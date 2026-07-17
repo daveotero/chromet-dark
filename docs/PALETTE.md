@@ -1,6 +1,6 @@
 # Chromet Dark palette
 
-Chromet Dark is built around a narrow graphite scale, warm off-white text, and one cool cyan accent. The palette was tuned from a browser reference that felt like it came from somewhere else in the solar system, then adjusted for Chrome's own rendering behavior.
+Chromet Dark is built around a narrow graphite scale, warm off-white text, and one cool cyan accent. The palette was tuned from a dark browser reference, then adjusted for Chrome's own rendering behavior.
 
 ## Core colors
 

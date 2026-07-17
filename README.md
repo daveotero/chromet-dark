@@ -1,6 +1,8 @@
 # Chromet Dark
 
-A quiet graphite and cyan theme for Google Chrome. It started as an attempt to recreate a browser that looked like it came from somewhere else in the solar system, then grew into its own small exercise in contrast, restraint, and getting Chrome's theme renderer to cooperate.
+**Chrome, but from beyond the solar system.**
+
+A quiet graphite and cyan theme built around contrast, restraint, and getting Chrome's theme renderer to cooperate.
 
 ![Chromet Dark preview](assets/preview.png)
 
