@@ -24,11 +24,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Validate committed assets
+        run: npm run validate
+
       - name: Rebuild assets
         run: npm run build
 
-      - name: Validate theme
+      # Sharp/libvips may encode equivalent PNG pixels differently across
+      # operating systems, so validate decoded content instead of PNG bytes.
+      - name: Validate rebuilt assets
         run: npm run validate
-
-      - name: Confirm generated files are current
-        run: git diff --exit-code
