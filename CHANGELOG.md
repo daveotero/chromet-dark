@@ -4,9 +4,18 @@ All notable changes to Chromet Dark are documented here.
 
 The project follows [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+The `0.0.x` entries record internal development milestones. They were not published or tagged releases.
 
-## [1.4.0] - 2026-07-17
+## Unreleased
+
+### Documentation
+
+- Relabeled unpublished development milestones from `1.x` to `0.0.x` ahead of the first public `0.1.0` release.
+- Clarified that the MIT License covers the repository's source, documentation, icons, and theme artwork.
+- Aligned public copy with the theme's graphite-first appearance.
+- Replaced the generated browser illustration with a real Chrome Web Store screenshot and stopped asset builds from overwriting it.
+
+## 0.0.5 - 2026-07-17
 
 ### Changed
 
@@ -16,7 +25,7 @@ The project follows [Semantic Versioning](https://semver.org/).
 - Expanded validation to verify every row of the generated toolbar transition.
 - Documented Chrome's shared active-tab and toolbar image constraint.
 
-## [1.3.0] - 2026-07-17
+## 0.0.4 - 2026-07-17
 
 ### Fixed
 
@@ -29,7 +38,7 @@ The project follows [Semantic Versioning](https://semver.org/).
 - Chrome Web Store listing assets and publication notes.
 - GitHub Actions validation and tagged-release workflows.
 
-## [1.2.0] - 2026-07-17
+## 0.0.3 - 2026-07-17
 
 ### Changed
 
@@ -37,22 +46,15 @@ The project follows [Semantic Versioning](https://semver.org/).
 - Matched the active tab to the rendered address-bar color, `#323436`.
 - Introduced the vertically banded toolbar image.
 
-## [1.1.0] - 2026-07-17
+## 0.0.2 - 2026-07-17
 
 ### Changed
 
 - Increased selected-tab contrast.
 
-## [1.0.0] - 2026-07-17
+## 0.0.1 - 2026-07-17
 
 ### Added
 
-- Initial graphite and cyan theme.
+- Initial dark graphite theme.
 - Manifest V3 color mappings, icons, toolbar artwork, documentation, and local installation package.
-
-[Unreleased]: https://github.com/daveotero/chromet-dark/compare/v1.4.0...HEAD
-[1.4.0]: https://github.com/daveotero/chromet-dark/releases/tag/v1.4.0
-[1.3.0]: https://github.com/daveotero/chromet-dark/releases/tag/v1.3.0
-[1.2.0]: https://github.com/daveotero/chromet-dark/releases/tag/v1.2.0
-[1.1.0]: https://github.com/daveotero/chromet-dark/releases/tag/v1.1.0
-[1.0.0]: https://github.com/daveotero/chromet-dark/releases/tag/v1.0.0

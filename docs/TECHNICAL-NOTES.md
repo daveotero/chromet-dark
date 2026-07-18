@@ -10,7 +10,7 @@ Chromet Dark uses that behavior intentionally. [`../theme/images/toolbar.png`](.
 - Rows 48 through 63 blend linearly from `#323436` to `#1F2121`.
 - Rows 64 through 199 are `#1F2121`.
 
-Chrome samples that image differently for the active tab and toolbar. Version 1.3.0 used a hard transition at row 56, which fixed an earlier misaligned lower-tab overlay but left a narrow, visually abrupt handoff. Version 1.4.0 replaces that edge with the 16-pixel blend. At the center of the transition, row 56 is `#282A2B`, midway between the two primary surfaces.
+Chrome samples that image differently for the active tab and toolbar. Internal version 0.0.4 used a hard transition at row 56, which fixed an earlier misaligned lower-tab overlay but left a narrow, visually abrupt handoff. Version 0.0.5 replaces that edge with the 16-pixel blend. At the center of the transition, row 56 is `#282A2B`, midway between the two primary surfaces.
 
 The validation script computes the expected color for every transition row and checks the left, center, and right sides of the image. This prevents an asset optimization, editor export, or later palette change from silently changing the blend or reintroducing the hard seam.
 
@@ -32,7 +32,7 @@ Chrome owns the physical thickness of the line between the toolbar or bookmarks 
 
 [Chrome derives the separator color](https://chromium.googlesource.com/chromium/src/+/8ee1cda058f1700bfa3b75a616acdcee21707d87/chrome/browser/themes/theme_helper.cc) by blending `toolbar_button_icon` into `toolbar` at an alpha of `0x3A`. Earlier Chromet Dark builds declared `toolbar` as `#434646` even though the opaque toolbar artwork settled at `#1F2121`. With the icon color at `#8C8D8C`, that mismatch produced an approximately `#545656` divider, which was much brighter than the visible bookmarks surface.
 
-Version 1.4.0 aligns the declared toolbar fallback with the rendered lower surface:
+Version 0.0.5 aligns the declared toolbar fallback with the rendered lower surface:
 
 - `toolbar`: `#1F2121`
 - `toolbar_button_icon`: `#8C8D8C`
@@ -52,7 +52,7 @@ The colors-only variant is not included in the Chrome Web Store ZIP.
 
 ## Generated assets
 
-Run `npm run build` to regenerate icons, toolbar art, the repository preview, and store artwork. The SVG source is embedded in [`../scripts/build-assets.mjs`](../scripts/build-assets.mjs), while the installable theme contains only PNG output.
+Run `npm run build` to regenerate icons, toolbar art, and promotional tiles. The SVG source is embedded in [`../scripts/build-assets.mjs`](../scripts/build-assets.mjs), while the installable theme contains only PNG output. The Store screenshot is a real browser capture and is not generated or overwritten by the build.
 
 Generated files are committed so someone can load the theme without installing Node.js. Continuous integration rebuilds them and fails if the committed output is stale.
 
@@ -65,6 +65,10 @@ Only [`../theme/`](../theme/) is packaged for the Chrome Web Store. It contains:
 - One PNG toolbar image
 
 There is no JavaScript, HTML, remote code, permission request, or host access in the installable package.
+
+## Dark-only behavior
+
+Chrome extension themes define one `theme` object containing one set of images, colors, tints, and properties. There is no paired light/dark variant field, so Chromet Dark intentionally applies its dark palette under Chrome's Light, Dark, and System appearance settings. A theme only controls surfaces exposed by Chrome's theme API; it cannot force arbitrary websites or all internal Chrome pages into dark mode.
 
 ## Chrome rendering limitations
 

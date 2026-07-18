@@ -8,7 +8,7 @@ Chrome theme rendering can change with browser updates, operating-system chrome,
 2. Load the [`../theme`](../theme) directory through `chrome://extensions`.
 3. Restart Chrome once.
 4. Check the active tab at 100 percent display scaling.
-5. Check an inactive window and an Incognito window.
+5. Check an inactive window.
 6. Inspect common toolbar bubbles and the New Tab page.
 
 ## Tab strip
@@ -21,6 +21,7 @@ Chrome theme rendering can change with browser updates, operating-system chrome,
 - Tab with unsaved-form indicator
 - Narrow tabs with many pages open
 - Tab groups in collapsed and expanded states
+- Horizontal and vertical tab layouts
 - Dragged tab and detached tab window
 - New-tab button
 - Window maximized, restored, and snapped
@@ -59,6 +60,7 @@ Acceptance criteria:
 ## Page-adjacent surfaces
 
 - New Tab page
+- `chrome://apps`, including any visible action links
 - Downloads bubble
 - Find bar with Ctrl+F
 - Password and payment prompts
@@ -66,15 +68,19 @@ Acceptance criteria:
 - Full-screen notification
 - Side panel, if enabled
 - DevTools docked on each side
+- Split view with the left view active, then the right view active
+
+Acceptance criteria:
+
+- Normal browser chrome and the modern Google New Tab page do not show an unexpected bright focus treatment.
 
 ## Window states
 
 - Active normal window
 - Inactive normal window
-- Incognito window
-- Inactive Incognito window
 - Chrome after restart
 - Chrome after toggling another theme and reloading Chromet Dark
+- Chrome appearance set to Light, Dark, and System; theme-owned surfaces remain dark
 
 ## Display matrix
 
@@ -95,7 +101,7 @@ Include:
 - Operating system and version
 - Display scaling percentage
 - Maximized or restored window state
-- Normal or Incognito mode
+- Active or inactive Chrome window
 - Screenshot of the full browser window
 - Close crop of the affected area
 - Whether the issue persists after restarting Chrome

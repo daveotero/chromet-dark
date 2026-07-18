@@ -10,7 +10,7 @@ Visual behavior can vary with Chrome version, operating system, window state, an
 - Chrome version from `chrome://version`
 - Operating system
 - Display scaling percentage
-- Whether the window is maximized, restored, inactive, or Incognito
+- Whether the window is maximized, restored, active, or inactive
 - A full-resolution screenshot
 - A short description of the expected result
 
@@ -33,7 +33,7 @@ When changing a manifest color:
 1. Update `theme/manifest.json`.
 2. Update the matching token in `docs/PALETTE.md`.
 3. Rebuild any affected artwork.
-4. Test the normal, inactive-window, and Incognito variants.
+4. Test the normal and inactive-window states.
 5. Run `npm run release:check`.
 
 ## Editing toolbar artwork
@@ -48,7 +48,7 @@ If the boundary changes, include a screenshot with pixel coordinates showing bot
 - Do not commit `Cached Theme.pak`, CRX files, PEM keys, `node_modules`, or `dist` output.
 - Update the changelog for user-visible changes.
 - Keep `package.json` and manifest versions synchronized.
-- Do not add third-party browser names, logos, screenshots, or copied artwork.
+- Do not add copied third-party promotional artwork or imply affiliation with another browser vendor.
 - Make sure generated files are current. CI will fail if `npm run build` creates a diff.
 
 ## Commit style
@@ -57,6 +57,6 @@ Short, direct commit subjects are preferred:
 
 ```text
 Fix active-tab image alignment
-Add Incognito testing notes
+Add high-DPI testing notes
 Update store promo tile
 ```

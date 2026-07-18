@@ -2,9 +2,9 @@
 
 **Chrome, but from beyond the solar system.**
 
-A quiet graphite and cyan theme built around contrast, restraint, and getting Chrome's theme renderer to cooperate.
+A quiet graphite theme built around contrast, restraint, and getting Chrome's theme renderer to cooperate.
 
-![Chromet Dark preview](assets/preview.png)
+![Chromet Dark in Google Chrome](assets/store/screenshot-1280x800.png)
 
 ## What it changes
 
@@ -13,11 +13,12 @@ A quiet graphite and cyan theme built around contrast, restraint, and getting Ch
 - Dark toolbar and bookmarks surfaces
 - A quieter content divider beneath the bookmarks bar
 - Warm off-white text and muted gray controls
-- A single cyan accent
 - Dark New Tab page colors
-- Matching inactive-window and Incognito states
+- Matching inactive-window states
 
 Chromet Dark is a theme only. It contains no JavaScript, page access, permissions, analytics, or network requests.
+
+Chromet Dark intentionally ships one dark palette. Chrome theme manifests do not support paired light and dark variants, so the installed palette remains dark regardless of Chrome's Light, Dark, or System appearance setting. Themes cannot force websites or non-themeable Chrome pages into dark mode.
 
 ## Install
 
@@ -46,7 +47,6 @@ Chrome permits one active theme at a time. To remove Chromet Dark, open `chrome:
 | Derived content divider | `#383A39` | 56, 58, 57 |
 | Primary text | `#D6D5D4` | 214, 213, 212 |
 | Toolbar icons | `#8C8D8C` | 140, 141, 140 |
-| Cyan accent | `#1FB8CD` | 31, 184, 205 |
 | New Tab background | `#171615` | 23, 22, 21 |
 
 The full field map and the reasoning behind the derived colors are documented in [`docs/PALETTE.md`](docs/PALETTE.md).
@@ -109,10 +109,10 @@ This regenerates:
 
 - Theme icons at 16, 32, 48, and 128 pixels
 - The aligned toolbar-transition image
-- The repository preview
-- The 1280 by 800 store screenshot
 - The 440 by 280 small promotional tile
 - The optional 1400 by 560 marquee tile
+
+The 1280 by 800 Store screenshot is a real browser capture and is intentionally not generated or overwritten by the build.
 
 ### Validate
 
@@ -143,6 +143,8 @@ This rebuilds the generated assets, validates the theme, and creates the upload 
 At minimum, test these states before a release:
 
 - Normal, hovered, pinned, grouped, and narrow tabs
+- Horizontal and vertical tab layouts
+- Split view with each side active
 - Focused and unfocused address bar
 - Omnibox suggestions
 - Bookmarks bar with visible labels and folders
@@ -150,7 +152,6 @@ At minimum, test these states before a release:
 - Downloads, profile, extension, and site-information bubbles
 - Restored and maximized windows
 - Inactive Chrome window
-- Incognito window
 - Chrome restart
 - Any monitor scaling factors you actively use
 
@@ -161,7 +162,7 @@ The complete checklist is in [`docs/TESTING.md`](docs/TESTING.md).
 The manifest and `package.json` versions should always match. Update [`CHANGELOG.md`](CHANGELOG.md), commit the change, and tag it:
 
 ```bash
-git tag v1.4.0
+git tag v0.1.0
 git push origin main --tags
 ```
 
@@ -177,7 +178,7 @@ Bug reports and careful visual refinements are welcome. Please read [`CONTRIBUTI
 
 ## License
 
-Chromet Dark is released under the [MIT License](LICENSE).
+Chromet Dark is released under the [MIT License](LICENSE). Unless otherwise noted, the source, documentation, icons, and theme artwork in this repository are all covered by that license.
 
 ## Independence
 

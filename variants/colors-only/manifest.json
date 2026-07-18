@@ -2,8 +2,8 @@
   "manifest_version": 3,
   "name": "Chromet Dark (Colors Only)",
   "short_name": "Chromet Dark",
-  "version": "1.4.0",
-  "description": "An image-free fallback for the Chromet Dark graphite-and-cyan Chrome theme.",
+  "version": "0.0.5",
+  "description": "An image-free fallback for the Chromet Dark graphite Chrome theme.",
   "theme": {
     "colors": {
       "frame": [25, 26, 26],

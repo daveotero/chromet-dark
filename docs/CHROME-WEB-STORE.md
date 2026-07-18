@@ -10,13 +10,15 @@ Chromet Dark
 
 ### Summary
 
-A quiet graphite and cyan theme for Google Chrome with clear tabs and restrained contrast.
+A quiet graphite theme for Google Chrome with clear tabs and restrained contrast.
 
 ### Detailed description
 
-Chromet Dark gives Google Chrome a calm, near-black frame with a clearly lifted active tab, warm off-white text, muted controls, and a small cyan accent.
+Chromet Dark gives Google Chrome a calm, near-black frame with a clearly lifted active tab, warm off-white text, and muted controls.
 
 The palette is intentionally restrained. Inactive tabs stay dark, the selected tab matches the visual weight of the address bar, and the toolbar remains distinct without becoming a bright gray band.
+
+Chromet Dark intentionally uses one dark palette. It does not switch to a light variant with Chrome or the operating system.
 
 Chromet Dark is a theme only. It contains no JavaScript, permissions, analytics, tracking, or network requests.
 
@@ -46,6 +48,14 @@ Use the exact dashboard wording available at submission time, with these answers
 
 The public privacy statement is [`../PRIVACY.md`](../PRIVACY.md).
 
+### Public URLs
+
+Use these after the repository is public:
+
+- Homepage: `https://github.com/daveotero/chromet-dark`
+- Support: `https://github.com/daveotero/chromet-dark/issues`
+- Privacy policy: `https://github.com/daveotero/chromet-dark/blob/main/PRIVACY.md`
+
 ## Prepared artwork
 
 | File | Dimensions | Purpose |
@@ -55,7 +65,7 @@ The public privacy statement is [`../PRIVACY.md`](../PRIVACY.md).
 | `assets/store/promo-small-440x280.png` | 440 by 280 | Small promotional tile |
 | `assets/store/promo-marquee-1400x560.png` | 1400 by 560 | Optional marquee tile |
 
-The generated preview is brand-neutral artwork. Before submission, consider adding one real Chrome screenshot from the final release build, with personal bookmarks, tabs, profiles, and account details removed. A real screenshot is the best proof of the selected-tab treatment.
+The Store screenshot is a real Chrome capture from a clean local profile. Recheck it before submission for personal bookmarks, tabs, profiles, account details, or browser prompts. The Chrome Web Store requires screenshots to demonstrate the actual user experience.
 
 ## Positioning and attribution
 
@@ -70,17 +80,19 @@ npm ci
 npm run release:check
 ```
 
-Upload `dist/chromet-dark-1.4.0.zip`. Its `manifest.json` is at the archive root.
+For the first public submission, update the project version to `0.1.0`, rerun the release check, and upload `dist/chromet-dark-0.1.0.zip`. Its `manifest.json` must be at the archive root.
 
 ## Pre-submission checklist
 
 - [ ] Finish the visual matrix in [`TESTING.md`](TESTING.md).
+- [ ] Set the first public release version to `0.1.0`.
 - [ ] Confirm `theme/manifest.json` and `package.json` use the same version.
 - [ ] Add the release entry to [`../CHANGELOG.md`](../CHANGELOG.md).
 - [ ] Run `npm run release:check` with no errors.
 - [ ] Open the ZIP and confirm `manifest.json` is at the root.
 - [ ] Load the unpacked `theme/` directory in the current stable Chrome release.
-- [ ] Verify normal, inactive-window, and Incognito states.
+- [ ] Verify normal and inactive-window states.
+- [ ] Confirm the real Store screenshot is full-bleed, 1280 by 800, and accurately shows the final theme.
 - [ ] Review artwork at full size for accidental personal information.
 - [ ] Confirm listing copy contains no unsupported comparisons or third-party marks.
 - [ ] Complete the dashboard privacy and distribution fields.
@@ -90,7 +102,7 @@ Upload `dist/chromet-dark-1.4.0.zip`. Its `manifest.json` is at the archive root
 ## Publication sequence
 
 1. Merge the final tested version to `main`.
-2. Create and push a matching tag, such as `v1.4.0`.
+2. Create and push the matching `v0.1.0` tag.
 3. Let the GitHub release workflow attach the generated ZIP.
 4. Upload the same ZIP in the Chrome Web Store developer dashboard.
 5. Complete the listing, privacy, distribution, and test-instruction sections.
