@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Chromet Dark",
   "short_name": "Chromet Dark",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "A quiet graphite Chrome theme with clear tabs and restrained contrast.",
   "icons": {
     "16": "icons/icon-16.png",

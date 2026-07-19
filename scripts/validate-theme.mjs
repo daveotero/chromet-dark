@@ -100,6 +100,7 @@ for (let row = 0; row < toolbarInfo.height; row++) {
 }
 
 const expectedAssets = new Map([
+  ["assets/brand/chromet-dark-mark-master.png", [1254, 1254]],
   ["assets/store/screenshot-1280x800.png", [1280, 800]],
   ["assets/store/promo-small-440x280.png", [440, 280]],
   ["assets/store/promo-marquee-1400x560.png", [1400, 560]]
@@ -108,6 +109,7 @@ const expectedAssets = new Map([
 for (const [relativeFile, [width, height]] of expectedAssets) {
   const metadata = await sharp(path.join(root, relativeFile)).metadata();
   assert(metadata.width === width && metadata.height === height, `${relativeFile} has the wrong dimensions`);
+  assert(metadata.hasAlpha === false, `${relativeFile} must be a 24-bit PNG without an alpha channel`);
 }
 
 console.log(`Validated Chromet Dark ${manifest.version}: manifest, package contents, icons, toolbar gradient, screenshot, and promotional artwork are correct.`);

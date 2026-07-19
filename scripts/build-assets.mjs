@@ -8,13 +8,18 @@ const root = path.resolve(here, "..");
 const imageDir = path.join(root, "theme", "images");
 const iconDir = path.join(root, "theme", "icons");
 const assetDir = path.join(root, "assets");
+const brandDir = path.join(assetDir, "brand");
 const storeDir = path.join(assetDir, "store");
+const brandMarkPath = path.join(brandDir, "chromet-dark-mark-master.png");
 
 await Promise.all([
   fs.mkdir(imageDir, { recursive: true }),
   fs.mkdir(iconDir, { recursive: true }),
+  fs.mkdir(brandDir, { recursive: true }),
   fs.mkdir(storeDir, { recursive: true })
 ]);
+
+await fs.access(brandMarkPath);
 
 const toolbarWidth = 512;
 const toolbarHeight = 200;
@@ -48,57 +53,103 @@ await sharp(toolbar, {
   .png({ compressionLevel: 9, palette: true })
   .toFile(path.join(imageDir, "toolbar.png"));
 
-const icon = Buffer.from(`
-<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
-  <defs>
-    <radialGradient id="bg" cx="58%" cy="42%" r="78%">
-      <stop offset="0" stop-color="#252929"/>
-      <stop offset="1" stop-color="#191A1A"/>
-    </radialGradient>
-    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
-      <feGaussianBlur stdDeviation="3.2" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-  </defs>
-  <rect x="3" y="3" width="122" height="122" rx="28" fill="url(#bg)" stroke="#3D3F40" stroke-width="2"/>
-  <circle cx="64" cy="64" r="37" fill="none" stroke="#383C3C" stroke-width="5"/>
-  <path d="M32 75 C45 94, 75 104, 96 79" fill="none" stroke="#1FB8CD" stroke-width="7" stroke-linecap="round" filter="url(#glow)"/>
-  <path d="M38 49 C49 31, 73 24, 91 38" fill="none" stroke="#A6A6A5" stroke-width="5" stroke-linecap="round" opacity=".82"/>
-  <circle cx="96" cy="79" r="7" fill="#1FB8CD" filter="url(#glow)"/>
-</svg>`);
+const { data: trimmedMark, info: trimmedMarkInfo } = await sharp(brandMarkPath)
+  .trim({ background: "#000000", threshold: 8 })
+  .png({ compressionLevel: 9 })
+  .toBuffer({ resolveWithObject: true });
+
+const markSide = Math.ceil(Math.max(trimmedMarkInfo.width, trimmedMarkInfo.height) * 1.12);
+const markTile = await sharp({
+  create: {
+    width: markSide,
+    height: markSide,
+    channels: 3,
+    background: "#000000"
+  }
+})
+  .composite([{
+    input: trimmedMark,
+    left: Math.round((markSide - trimmedMarkInfo.width) / 2),
+    top: Math.round((markSide - trimmedMarkInfo.height) / 2)
+  }])
+  .png({ compressionLevel: 9 })
+  .toBuffer();
 
 for (const size of [16, 32, 48, 128]) {
-  await sharp(icon)
-    .resize(size, size)
+  await sharp(markTile)
+    .resize(size, size, { fit: "fill", kernel: sharp.kernel.lanczos3 })
+    .removeAlpha()
     .png({ compressionLevel: 9 })
     .toFile(path.join(iconDir, `icon-${size}.png`));
 }
 
-function promo(width, height, titleSize, taglineSize) {
-  const iconSize = Math.round(height * 0.28);
-  const iconX = Math.round(width * 0.12);
-  const iconY = Math.round((height - iconSize) / 2);
-  const textX = Math.round(width * 0.34);
+function promoBackdrop({ width, height, titleSize, taglineSize, textX, titleY, taglineY }) {
   return Buffer.from(`
   <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
     <defs>
-      <radialGradient id="bg" cx="70%" cy="22%" r="100%"><stop offset="0" stop-color="#252929"/><stop offset="1" stop-color="#0E0F0F"/></radialGradient>
-      <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#050606"/>
+        <stop offset="0.58" stop-color="#101111"/>
+        <stop offset="1" stop-color="#1B1C1C"/>
+      </linearGradient>
+      <radialGradient id="pearlGlow" cx="24%" cy="48%" r="44%">
+        <stop offset="0" stop-color="#D8D4CC" stop-opacity=".09"/>
+        <stop offset=".42" stop-color="#8C8D8C" stop-opacity=".035"/>
+        <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+      </radialGradient>
     </defs>
     <rect width="${width}" height="${height}" fill="url(#bg)"/>
-    <rect x="1" y="1" width="${width - 2}" height="${height - 2}" rx="${Math.round(height * 0.06)}" fill="none" stroke="#3D3F40" stroke-width="2"/>
-    <g transform="translate(${iconX} ${iconY}) scale(${iconSize / 128})">
-      <circle cx="64" cy="64" r="48" fill="#191A1A" stroke="#3D3F40" stroke-width="4"/>
-      <path d="M32 75 C45 94, 75 104, 96 79" fill="none" stroke="#1FB8CD" stroke-width="8" stroke-linecap="round" filter="url(#glow)"/>
-      <path d="M38 49 C49 31, 73 24, 91 38" fill="none" stroke="#A6A6A5" stroke-width="6" stroke-linecap="round" opacity=".82"/>
-      <circle cx="96" cy="79" r="7" fill="#1FB8CD" filter="url(#glow)"/>
-    </g>
-    <text x="${textX}" y="${Math.round(height * 0.48)}" fill="#D6D5D4" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="${titleSize}" font-weight="650">Chromet Dark</text>
-    <text x="${textX}" y="${Math.round(height * 0.65)}" fill="#8C8D8C" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="${taglineSize}">Graphite. Clear. Quiet.</text>
+    <rect width="${width}" height="${height}" fill="url(#pearlGlow)"/>
+    <rect x="1" y="1" width="${width - 2}" height="${height - 2}" rx="${Math.round(height * 0.055)}" fill="none" stroke="#343636" stroke-width="2"/>
+    <text x="${textX}" y="${titleY}" fill="#E8E5E0" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="${titleSize}" font-weight="600" letter-spacing=".005em">Chromet Dark</text>
+    <text x="${textX}" y="${taglineY}" fill="#B3B3B0" font-family="Segoe UI, Inter, Arial, sans-serif" font-size="${taglineSize}" font-weight="400" letter-spacing=".01em">Dark. Clean. Quiet.</text>
   </svg>`);
 }
 
-await sharp(promo(440, 280, 30, 16)).png({ compressionLevel: 9 }).toFile(path.join(storeDir, "promo-small-440x280.png"));
-await sharp(promo(1400, 560, 76, 31)).png({ compressionLevel: 9 }).toFile(path.join(storeDir, "promo-marquee-1400x560.png"));
+async function writePromo({ width, height, markSize, markX, markY, textX, titleSize, taglineSize, titleY, taglineY, filename }) {
+  const resizedMark = await sharp(markTile)
+    .resize(markSize, markSize, { fit: "fill", kernel: sharp.kernel.lanczos3 })
+    .png({ compressionLevel: 9 })
+    .toBuffer();
+
+  await sharp(promoBackdrop({ width, height, titleSize, taglineSize, textX, titleY, taglineY }))
+    .composite([{
+      input: resizedMark,
+      left: markX,
+      top: markY,
+      blend: "screen"
+    }])
+    .removeAlpha()
+    .png({ compressionLevel: 9 })
+    .toFile(path.join(storeDir, filename));
+}
+
+await writePromo({
+  width: 440,
+  height: 280,
+  markSize: 190,
+  markX: 14,
+  markY: 45,
+  textX: 207,
+  titleSize: 34,
+  taglineSize: 19,
+  titleY: 127,
+  taglineY: 160,
+  filename: "promo-small-440x280.png"
+});
+
+await writePromo({
+  width: 1400,
+  height: 560,
+  markSize: 450,
+  markX: 68,
+  markY: 55,
+  textX: 570,
+  titleSize: 104,
+  taglineSize: 44,
+  titleY: 257,
+  taglineY: 321,
+  filename: "promo-marquee-1400x560.png"
+});
 
 console.log("Generated theme icons, toolbar image, and Chrome Web Store promotional artwork.");

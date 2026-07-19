@@ -112,6 +112,8 @@ This regenerates:
 - The 440 by 280 small promotional tile
 - The optional 1400 by 560 marquee tile
 
+The icons and promotional tiles are derived from [`assets/brand/chromet-dark-mark-master.png`](assets/brand/chromet-dark-mark-master.png), while their exact crops, typography, and dimensions are controlled by the build script.
+
 The 1280 by 800 Store screenshot is a real browser capture and is intentionally not generated or overwritten by the build.
 
 ### Validate

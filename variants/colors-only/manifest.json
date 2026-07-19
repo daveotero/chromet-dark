@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Chromet Dark (Colors Only)",
   "short_name": "Chromet Dark",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "An image-free fallback for the Chromet Dark graphite Chrome theme.",
   "theme": {
     "colors": {

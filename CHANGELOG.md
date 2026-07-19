@@ -8,6 +8,12 @@ The `0.0.x` entries record internal development milestones. They were not publis
 
 ## Unreleased
 
+## 0.1.0 - 2026-07-18
+
+### Added
+
+- Prepared the first public Chrome Web Store release of Chromet Dark.
+
 ### Documentation
 
 - Relabeled unpublished development milestones from `1.x` to `0.0.x` ahead of the first public `0.1.0` release.

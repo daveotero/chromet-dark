@@ -1,6 +1,6 @@
 {
   "name": "chromet-dark",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "private": true,
   "license": "MIT",
   "description": "Build and validation tooling for the Chromet Dark Google Chrome theme.",
