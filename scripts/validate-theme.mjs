@@ -102,6 +102,7 @@ for (let row = 0; row < toolbarInfo.height; row++) {
 const expectedAssets = new Map([
   ["assets/brand/chromet-dark-mark-master.png", [1254, 1254]],
   ["assets/store/screenshot-1280x800.png", [1280, 800]],
+  ["assets/store/screenshot-tabs-1280x800.png", [1280, 800]],
   ["assets/store/promo-small-440x280.png", [440, 280]],
   ["assets/store/promo-marquee-1400x560.png", [1400, 560]]
 ]);

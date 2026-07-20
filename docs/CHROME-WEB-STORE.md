@@ -10,17 +10,17 @@ Chromet Dark
 
 ### Summary
 
-A quiet graphite theme for Google Chrome with clear tabs and restrained contrast.
+A graphite Chrome theme with a distinct active tab, warm text, and balanced contrast.
 
 ### Detailed description
 
-Chromet Dark gives Google Chrome a calm, near-black frame with a clearly lifted active tab, warm off-white text, and muted controls.
+Chromet Dark wraps Google Chrome in deep graphite, with warm off-white text, soft gray controls, and a selected tab matched to the address bar.
 
-The palette is intentionally restrained. Inactive tabs stay dark, the selected tab matches the visual weight of the address bar, and the toolbar remains distinct without becoming a bright gray band.
+The current tab is easy to spot, while inactive tabs recede into the near-black frame. Subtle tonal shifts separate the tab strip, toolbar, and bookmarks bar without heavy outlines or bright gray bands.
 
-Chromet Dark intentionally uses one dark palette. It does not switch to a light variant with Chrome or the operating system.
+The palette stays dark regardless of Chrome or your operating system's appearance setting. It changes browser surfaces only, not websites.
 
-Chromet Dark is a theme only. It contains no JavaScript, permissions, analytics, tracking, or network requests.
+It is a theme only, with no JavaScript, permissions, analytics, tracking, or network requests.
 
 ### Single purpose
 
@@ -61,11 +61,12 @@ Use these after the repository is public:
 | File | Dimensions | Purpose |
 |---|---:|---|
 | `theme/icons/icon-128.png` | 128 by 128 | Store icon |
-| `assets/store/screenshot-1280x800.png` | 1280 by 800 | Store screenshot |
+| `assets/store/screenshot-1280x800.png` | 1280 by 800 | Full-window Store screenshot |
+| `assets/store/screenshot-tabs-1280x800.png` | 1280 by 800 | Close-up of the tabs and address bar |
 | `assets/store/promo-small-440x280.png` | 440 by 280 | Small promotional tile |
 | `assets/store/promo-marquee-1400x560.png` | 1400 by 560 | Optional marquee tile |
 
-The Store screenshot is a real Chrome capture from a clean local profile. Recheck it before submission for personal bookmarks, tabs, profiles, account details, or browser prompts. The Chrome Web Store requires screenshots to demonstrate the actual user experience.
+Keep the original full-window screenshot first and upload the tab close-up second. Both are real Chrome captures. Recheck them before submission for personal bookmarks, tabs, profiles, account details, or browser prompts. The Chrome Web Store requires screenshots to demonstrate the actual user experience.
 
 ## Positioning and attribution
 
@@ -92,7 +93,7 @@ For the first public submission, update the project version to `0.1.0`, rerun th
 - [ ] Open the ZIP and confirm `manifest.json` is at the root.
 - [ ] Load the unpacked `theme/` directory in the current stable Chrome release.
 - [ ] Verify normal and inactive-window states.
-- [ ] Confirm the real Store screenshot is full-bleed, 1280 by 800, and accurately shows the final theme.
+- [ ] Confirm both real Store screenshots are full-bleed, 1280 by 800, and accurately show the final theme.
 - [ ] Review artwork at full size for accidental personal information.
 - [ ] Confirm listing copy contains no unsupported comparisons or third-party marks.
 - [ ] Complete the dashboard privacy and distribution fields.

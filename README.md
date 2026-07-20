@@ -114,7 +114,7 @@ This regenerates:
 
 The icons and promotional tiles are derived from [`assets/brand/chromet-dark-mark-master.png`](assets/brand/chromet-dark-mark-master.png), while their exact crops, typography, and dimensions are controlled by the build script.
 
-The 1280 by 800 Store screenshot is a real browser capture and is intentionally not generated or overwritten by the build.
+The 1280 by 800 Store screenshots are real browser captures and are not generated or overwritten by the build.
 
 ### Validate
 

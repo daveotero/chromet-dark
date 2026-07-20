@@ -8,6 +8,11 @@ The `0.0.x` entries record internal development milestones. They were not publis
 
 ## Unreleased
 
+### Changed
+
+- Clarified the Chrome Web Store copy and replaced the ambiguous phrase "clear tabs" with a description of the distinct active tab.
+- Added a Store screenshot with a close-up of the tabs and address bar.
+
 ## 0.1.0 - 2026-07-18
 
 ### Added
