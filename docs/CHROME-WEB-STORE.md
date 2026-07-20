@@ -63,10 +63,11 @@ Use these after the repository is public:
 | `theme/icons/icon-128.png` | 128 by 128 | Store icon |
 | `assets/store/screenshot-1280x800.png` | 1280 by 800 | Full-window Store screenshot |
 | `assets/store/screenshot-tabs-1280x800.png` | 1280 by 800 | Close-up of the tabs and address bar |
+| `assets/store/screenshot-browsing-1280x800.png` | 1280 by 800 | Theme during normal browsing on Flatline Fest |
 | `assets/store/promo-small-440x280.png` | 440 by 280 | Small promotional tile |
 | `assets/store/promo-marquee-1400x560.png` | 1400 by 560 | Optional marquee tile |
 
-Keep the original full-window screenshot first and upload the tab close-up second. Both are real Chrome captures. Recheck them before submission for personal bookmarks, tabs, profiles, account details, or browser prompts. The Chrome Web Store requires screenshots to demonstrate the actual user experience.
+Keep the original full-window screenshot first, upload the tab close-up second, and use the Flatline Fest browsing view third. All three are real Chrome captures. Recheck them before submission for personal bookmarks, tabs, profiles, account details, or browser prompts. The Chrome Web Store requires screenshots to demonstrate the actual user experience.
 
 ## Positioning and attribution
 
@@ -93,7 +94,7 @@ For the first public submission, update the project version to `0.1.0`, rerun th
 - [ ] Open the ZIP and confirm `manifest.json` is at the root.
 - [ ] Load the unpacked `theme/` directory in the current stable Chrome release.
 - [ ] Verify normal and inactive-window states.
-- [ ] Confirm both real Store screenshots are full-bleed, 1280 by 800, and accurately show the final theme.
+- [ ] Confirm all three real Store screenshots are full-bleed, 1280 by 800, and accurately show the final theme.
 - [ ] Review artwork at full size for accidental personal information.
 - [ ] Confirm listing copy contains no unsupported comparisons or third-party marks.
 - [ ] Complete the dashboard privacy and distribution fields.

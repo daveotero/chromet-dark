@@ -6,12 +6,12 @@ The project follows [Semantic Versioning](https://semver.org/).
 
 The `0.0.x` entries record internal development milestones. They were not published or tagged releases.
 
-## Unreleased
+## 0.1.1 - 2026-07-20
 
 ### Changed
 
 - Clarified the Chrome Web Store copy and replaced the ambiguous phrase "clear tabs" with a description of the distinct active tab.
-- Added a Store screenshot with a close-up of the tabs and address bar.
+- Added Store screenshots with a close-up of the tabs and address bar and the theme shown during normal browsing.
 
 ## 0.1.0 - 2026-07-18
 
